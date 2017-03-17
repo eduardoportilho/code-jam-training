@@ -1,0 +1,19 @@
+{
+  "name": "code-jam-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/lib/index.js",
+  "scripts": {
+    "solve": "node ./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eduardoportilho/code-jam-training.git"
+  },
+  "author": "Eduardo <eduardo@portilho.com> (http://www.portilho.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eduardoportilho/code-jam-training/issues"
+  },
+  "homepage": "https://github.com/eduardoportilho/code-jam-training#readme"
+}
