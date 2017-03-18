@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/eduardoportilho/code-jam-training/issues"
   },
-  "homepage": "https://github.com/eduardoportilho/code-jam-training#readme"
+  "homepage": "https://github.com/eduardoportilho/code-jam-training#readme",
+  "dependencies": {
+    "mkdirp": "^0.5.1"
+  }
 }
