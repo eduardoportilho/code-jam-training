@@ -1,11 +1,10 @@
-module.exports = function(input) {
+module.exports = function(input, output) {
   let t = input.popInt()
-  let allDigits = {}
 
   for(var i = 0 ; i < t ; i++) {
     var n = input.popInt()
     var solution = getSolutionFor(n)
-    console.log(`Case #${i+1}: ${solution}`)
+    output.addSolution(solution)
   }
 };
 
