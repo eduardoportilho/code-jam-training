@@ -4,7 +4,8 @@
   "description": "",
   "main": "/lib/index.js",
   "scripts": {
-    "solve": "node ./lib/index.js"
+    "solve": "node ./lib/index.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://github.com/eduardoportilho/code-jam-training#readme",
   "dependencies": {
     "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
