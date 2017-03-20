@@ -10,17 +10,40 @@ module.exports = function(input, output) {
 };
 
 function getSolutionFor(stack) {
-  var currentStack = _.trimEnd(stack, '+')
-  var isBasicCase = checkBasicCases(stack)
-  if (isBasicCase >= 0) {
-    return isBasicCase
+  var flips = 0
+
+  function solve(stack) {
+    var currentStack = _.trimEnd(stack, '+')
+    var isBasicCase = checkBasicCases(currentStack)
+    if (isBasicCase >= 0) {
+      return flips + isBasicCase
+    }
+
+    //end char is - and there are +s
+    ////flip, remove and recurse
+    
+    let firstCharRepeatEnd = getFirstCharRepeatEnd(currentStack)
+    currentStack = flip(currentStack, firstCharRepeatEnd)
+    flips++
+    return solve(currentStack)
   }
 
-  //end char is -
-
-  return 1
+  return solve(stack)
 }
 
+
+function flip(stack, lastIndexToFlip) {
+  var partToFlip = stack.slice(0, lastIndexToFlip+1)
+  var partNotToFlip = stack.slice(lastIndexToFlip+1)
+
+  return partToFlip
+    .split('')
+    .map((char) => char === '+' ? '-' : '+')
+    .join('') + partNotToFlip
+}
+module.exports._flip = flip
+
+// check for '', '++...' or  '--...'
 function checkBasicCases(stack) {
   if (stack.length === 0) {
     return 0
@@ -33,5 +56,22 @@ function checkBasicCases(stack) {
     //only -
     return 1
   }
-  return -1;
+  return -1
+}
+
+// 'aaabad' => 2, 'cc' => 1, 'a' => 0 , '' => -1
+function getFirstCharRepeatEnd(stack) {
+  if (stack.length === 0) {
+    return -1
+  }
+  let first = stack.charAt(0)
+  var index = 0
+
+  while (index < stack.length) {
+    if (stack.charAt(index) !== first) {
+      return index-1
+    }
+    index++
+  }
+  return index-1
 }

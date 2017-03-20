@@ -31,6 +31,12 @@ describe('2016.q.b', () => {
   it('+++---: 2', () => {
     let input = new Input(['1', '---+++'])
     solution(input, output)
-    expect(output.toString()).to.equal('Case #1: 2')
+    expect(output.toString()).to.equal('Case #1: 1')
+  })
+
+  describe('internal fns',  () => {
+    it('should flip', () => {
+      expect(solution._flip('+++---', 2)).to.equal('------')
+    })
   })
 })
