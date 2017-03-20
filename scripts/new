@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+mkdir "./input/$1"
+mkdir "./output/$1"
+cat <<EOF >"./solutions/$1.js"
+  module.exports = function(input, output) {
+    let t = input.popInt()
+    for(var i = 0 ; i < t ; i++) {
+      var n = input.popInt()
+      var solution = getSolutionFor(n)
+      output.addSolution(solution)
+    }
+  };
+
+  function getSolutionFor(n) {
+    var state = 0
+
+    function solve(n) {
+      return ''
+    }
+
+    return solve(n)
+  }
+EOF
+cat <<EOF >"./test/$1-test.js"
+let expect = require('chai').expect
+let Input = require('../lib/input')
+let Output = require('../lib/output')
+let solution = require('../solutions/$1.js')
+
+describe('$1', () => {
+  var output
+
+  beforeEach(() => {
+    output = new Output()
+  })
+
+  it('Should ...', () => {
+    let input = new Input(['1', '0'])
+    solution(input, output)
+    expect(output.toString()).to.equal('Case #1: 0')
+  })
+})
+EOF
+echo Done!

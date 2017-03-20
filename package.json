@@ -4,6 +4,7 @@
   "description": "",
   "main": "/lib/index.js",
   "scripts": {
+    "new": "scripty",
     "solve": "node ./lib/index.js",
     "test": "mocha"
   },
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "scripty": "^1.7.1"
   }
 }
