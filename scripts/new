@@ -1,27 +1,36 @@
 #!/usr/bin/env sh
 
+echo "Creating boilerplate for problem '$1'..."
+
 mkdir "./input/$1"
 mkdir "./output/$1"
-cat <<EOF >"./solutions/$1.js"
-  module.exports = function(input, output) {
-    let t = input.popInt()
-    for(var i = 0 ; i < t ; i++) {
-      var n = input.popInt()
-      var solution = getSolutionFor(n)
-      output.addSolution(solution)
-    }
-  };
 
-  function getSolutionFor(n) {
-    var state = 0
-
-    function solve(n) {
-      return ''
-    }
-
-    return solve(n)
-  }
+cat <<EOF >"./input/$1/sample.in"
+0
 EOF
+
+
+cat <<EOF >"./solutions/$1.js"
+module.exports = function(input, output) {
+  let t = input.popInt()
+  for(var i = 0 ; i < t ; i++) {
+    var n = input.popInt()
+    var solution = getSolutionFor(n)
+    output.addSolution(solution)
+  }
+}
+
+function getSolutionFor(n) {
+  var state = 0
+
+  function solve(n) {
+    return ''
+  }
+
+  return solve(n)
+}
+EOF
+
 cat <<EOF >"./test/$1-test.js"
 let expect = require('chai').expect
 let Input = require('../lib/input')
@@ -42,4 +51,7 @@ describe('$1', () => {
   })
 })
 EOF
-echo Done!
+
+echo "Done!"
+echo "Solve: npm run solve $1 sample"
+echo "Test: npm run test -- -g $1"
