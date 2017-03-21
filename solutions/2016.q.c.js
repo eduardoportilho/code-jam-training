@@ -15,13 +15,16 @@ module.exports = function(input, output) {
 
 function getSolutionFor(numDigits, numJamcoins) {
   var jamcoins = []
+  console.time('Sieve took:')
+  var sieve = numbers.prime.sieve(65536);
+  console.timeEnd('Sieve took:')
 
   function solve() {
     var bar = new ProgressBar('[:bar] :percent - :elapsed', { total: numJamcoins, width: 50 })
     var i = 0
     while (jamcoins.length < numJamcoins) {
       var possibleJamcoin = generateJamcoin(numDigits, i++)
-      var jamcoin = validateJamcoin(possibleJamcoin)
+      var jamcoin = validateJamcoin(possibleJamcoin, sieve)
       if (jamcoin.isValid) {
         jamcoins.push(jamcoin)
         bar.tick()
@@ -51,11 +54,11 @@ function toBinaryString(decimal, digits) {
  * @return {Object} jamcoin
  * @return {boolean} jamcoin.isValid
  */
-function validateJamcoin(jamcoinString) {
+function validateJamcoin(jamcoinString, sieve) {
   var divisors = []
   for(var base = 2 ; base <= 10 ; base++) {
     var jcOnBase = parseInt(jamcoinString, base)
-    var divisor = getPrimeDivisor(jcOnBase);
+    var divisor = getPrimeDivisor(jcOnBase, sieve);
     if (divisor < 0) return {isValid: false}
     divisors.push(divisor)
   }
@@ -66,13 +69,15 @@ function validateJamcoin(jamcoinString) {
   }
 }
 
-function getPrimeDivisor(number) {
-  let primeFactors = numbers.prime.factorization(number)
-  if (primeFactors.length === 0 ||
-    primeFactors[0] === number) {
-    return -1
+function getPrimeDivisor(number, sieve) {
+  var prime
+  for(var i = 0 ; i<sieve.length ; i++) {
+    prime = sieve[i]
+    if (number % prime === 0) {
+      return prime
+    }
   }
-  return _.last(primeFactors)
+  return -1
 }
 
 function jamcoinToString(jamcoin) {
