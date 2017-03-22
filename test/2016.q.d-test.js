@@ -11,29 +11,34 @@ describe('2016.q.d', () => {
     output = new Output()
   })
 
-  it('If C = 1 && S == K:  1..K', () => {
-    solution(new Input(['1', '1 1 1']), output)
-    expect(output.toString()).to.equal('Case #1: 1')
+  describe('basic cases', () => {
+    it('If K = 1:  1', () => {
+      solution(new Input(['1', '1 10 10']), output)
+      expect(output.toString()).to.equal('Case #1: 1')
+    })
 
-    output = new Output()
-    solution(new Input(['1', '2 1 2']), output)
-    expect(output.toString()).to.equal('Case #1: 1 2')
+    it('If C = 1 && S == K:  1..K', () => {
+      solution(new Input(['1', '1 1 1']), output)
+      expect(output.toString()).to.equal('Case #1: 1')
 
-    output = new Output()
-    solution(new Input(['1', '3 1 3']), output)
-    expect(output.toString()).to.equal('Case #1: 1 2 3')
-  })
+      output = new Output()
+      solution(new Input(['1', '2 1 2']), output)
+      expect(output.toString()).to.equal('Case #1: 1 2')
 
-  it('If C = 1 && S < K:  IMPOSSIBLE', () => {
-    solution(new Input(['1', '1 1 0']), output)
-    expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
+      output = new Output()
+      solution(new Input(['1', '3 1 3']), output)
+      expect(output.toString()).to.equal('Case #1: 1 2 3')
+    })
 
-    output = new Output()
-    solution(new Input(['1', '2 1 1']), output)
-    expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
+    it('If C = 1 && S < K:  IMPOSSIBLE', () => {
 
-    output = new Output()
-    solution(new Input(['1', '3 1 2']), output)
-    expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
+      output = new Output()
+      solution(new Input(['1', '2 1 1']), output)
+      expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
+
+      output = new Output()
+      solution(new Input(['1', '3 1 2']), output)
+      expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
+    })
   })
 })

@@ -11,17 +11,23 @@ module.exports = function(input, output) {
   }
 }
 
-function getSolutionFor(numInitialTiles, complexity, numStudents) {
-  var numTiles = Math.pow(numInitialTiles, complexity)
+function getSolutionFor(K, C, S) {
+  var numTiles = Math.pow(K, C)
   var state = 0
 
   function solve() {
-    if (complexity === 1) {
-      if (numStudents < numInitialTiles)
-        return 'IMPOSSIBLE'
-      return _.range(1, numInitialTiles+1).join(' ');
+    if (K === 1) {
+      return '1'
     }
-    return 'IMPOSSIBLE'
+    if (C === 1) {
+      if (S < K)
+        return 'IMPOSSIBLE'
+      return _.range(1, K+1).join(' ');
+    }
+    if(S < K-1) {
+        return 'IMPOSSIBLE'
+    }
+    return _.range(2, S+1).join(' ');
   }
 
   return solve()
