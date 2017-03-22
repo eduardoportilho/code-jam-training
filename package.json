@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/eduardoportilho/code-jam-training#readme",
   "dependencies": {
+    "big-integer": "^1.6.17",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "numbers": "^0.6.0",

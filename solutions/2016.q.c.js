@@ -1,6 +1,7 @@
 var _ = require('lodash')
 var numbers = require('numbers')
 var ProgressBar = require('progress');
+var bigInt = require("big-integer");
 
 module.exports = function(input, output) {
   let t = input.popInt()
@@ -17,6 +18,7 @@ function getSolutionFor(numDigits, numJamcoins) {
   var jamcoins = []
   console.time('Sieve took:')
   var sieve = numbers.prime.sieve(65536);
+  console.log(`Last sieve: ${_.last(sieve)}`)
   console.timeEnd('Sieve took:')
 
   function solve() {
@@ -57,10 +59,17 @@ function toBinaryString(decimal, digits) {
 function validateJamcoin(jamcoinString, sieve) {
   var divisors = []
   for(var base = 2 ; base <= 10 ; base++) {
-    var jcOnBase = parseInt(jamcoinString, base)
-    var divisor = getPrimeDivisor(jcOnBase, sieve);
-    if (divisor < 0) return {isValid: false}
-    divisors.push(divisor)
+    var jamcoinOnBase = bigInt(jamcoinString, base)
+    var divisor = getPrimeDivisor(jamcoinOnBase, sieve);
+    if (divisor < 0)  {
+      return {isValid: false}
+    } else {
+      divisors.push(divisor)
+    }
+  }
+  if (divisors.length != 9) {
+    //shouldn't happen...
+    throw new Error('Expected 9 divisors!')
   }
   return {
     isValid: true,
@@ -69,11 +78,11 @@ function validateJamcoin(jamcoinString, sieve) {
   }
 }
 
-function getPrimeDivisor(number, sieve) {
+function getPrimeDivisor(bigint, sieve) {
   var prime
-  for(var i = 0 ; i<sieve.length ; i++) {
+  for(var i = 0 ; i < sieve.length ; i++) {
     prime = sieve[i]
-    if (number % prime === 0) {
+    if (bigint.mod(prime).equals(bigInt.zero)) {
       return prime
     }
   }
