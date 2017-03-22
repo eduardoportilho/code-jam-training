@@ -5,6 +5,30 @@ echo "Creating boilerplate for problem '$1'..."
 mkdir "./input/$1"
 mkdir "./output/$1"
 
+cat <<EOF >"./problems/$1.md"
+# [$1](https://code.google.com/codejam/contest/...)
+
+## Problem
+
+## Input
+
+## Output
+
+## Limits
+
+## Small dataset
+
+## Large dataset
+
+## Sample
+
+```
+Input   | Output 
+----------------- 
+        | 
+```
+EOF
+
 cat <<EOF >"./input/$1/sample.in"
 0
 EOF
