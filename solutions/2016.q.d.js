@@ -27,7 +27,7 @@ function getSolutionFor(K, C, S) {
     if(S < K-1) {
         return 'IMPOSSIBLE'
     }
-    return _.range(2, S+1).join(' ');
+    return _.range(2, K+1).join(' ');
   }
 
   return solve()
