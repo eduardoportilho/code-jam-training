@@ -11,7 +11,7 @@ describe('2016.q.d', () => {
     output = new Output()
   })
 
-  describe('solution 1', () => {
+  describe('complex cases:', () => {
 
     it('C == 1 : 1..k', () => {
       solution(new Input(['1', '10 1 20']), output)
@@ -23,13 +23,13 @@ describe('2016.q.d', () => {
       expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
     })
 
-    it('C > 1 : 2..k', () => {
+    xit('C > 1 : 2..k', () => {
       solution(new Input(['1', '10 10 20']), output)
       expect(output.toString()).to.equal('Case #1: 2 3 4 5 6 7 8 9 10')
     })
 
 
-    it('C > 1 : S >= K-1', () => {
+    xit('C > 1 : S >= K-1', () => {
       solution(new Input(['1', '10 10 8']), output)
       expect(output.toString()).to.equal('Case #1: IMPOSSIBLE')
     })
