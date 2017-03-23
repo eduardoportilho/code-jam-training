@@ -6,6 +6,7 @@
   "scripts": {
     "new": "scripty",
     "solve": "node ./lib/index.js",
+    "retro": "node ./lib/retro.js",
     "test": "mocha"
   },
   "repository": {
