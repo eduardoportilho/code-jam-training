@@ -20,22 +20,22 @@ function getSolutionFor(K, C, S) {
     if (K === 1) {
       return '1'
     }
-
-    if (C === 1) {
+    else if (C === 1) {
       return (S < K) ? 'IMPOSSIBLE' : getRange(1, K).join(' ')
     }
-
-
-//Smin = (k/2)up 
-//I1 = [2, 2 + (Smin/2)up]
-//I2 = [K^C - 2 - (Smin/2)down ,K^C-2]
+    else if (K === 2) {
+      return '2'
+    }
+    else if (K === 3) {
+      return (S < 2) ? 'IMPOSSIBLE' : '2 3'
+    }
 
     let Smin = Math.ceil(K/2)
     if (S < Smin) {
         return 'IMPOSSIBLE'
     }
-    let intAend = 2 + Math.ceil(Smin/2)
-    let intBstart = KC - 2 + Math.floor(Smin/2)
+    let intAend = 1 + Math.ceil(Smin/2)
+    let intBstart = KC - (1 + Math.floor(Smin/2))
 
     let intA = getRange(2, intAend)
     let intB = getRange(intBstart, KC-2)
