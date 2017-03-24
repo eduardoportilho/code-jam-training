@@ -17,8 +17,9 @@ function getSolutionFor(Smax, audience) {
     for(var S = 0 ; S <= Smax ; S++) {
       var ppl = audience[S]
       if (S > clapping && ppl > 0) {
-        invited += (S - clapping)
-        clapping += invited
+        var newInvites = (S - clapping)
+        invited += newInvites
+        clapping += newInvites
       }
       clapping += ppl
     }
