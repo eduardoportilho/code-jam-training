@@ -22,11 +22,11 @@ cat <<EOF >"./problems/$1.md"
 
 ## Sample
 
-```
+\`\`\`
 Input   | Output 
 ----------------- 
         | 
-```
+\`\`\`
 EOF
 
 cat <<EOF >"./input/$1/sample.in"
