@@ -1,3 +1,5 @@
+let _ = require('lodash')
+
 module.exports = function(input, output) {
   let t = input.popInt()
   for(var i = 0 ; i < t ; i++) {
@@ -9,9 +11,10 @@ module.exports = function(input, output) {
 }
 
 function getSolutionFor(D, P) {
-  var state = 0
+  var tMax = _.max(P)
 
   function solve() {
+    if (tMax === 1) return '1'
     return ''
   }
 

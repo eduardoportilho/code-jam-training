@@ -10,9 +10,11 @@ describe('2015.q.b', () => {
     output = new Output()
   })
 
-  it('Should ...', () => {
-    let input = new Input(['1', '0'])
-    solution(input, output)
-    expect(output.toString()).to.equal('Case #1: 0')
+  describe('Base cases:', () => {
+    it('only 1s', () => {
+      let input = new Input(['1', '3', '1 1 1'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 1')
+    })
   })
 })
