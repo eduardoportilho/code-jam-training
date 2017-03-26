@@ -16,5 +16,17 @@ describe('2015.q.b', () => {
       solution(input, output)
       expect(output.toString()).to.equal('Case #1: 1')
     })
+
+    it('contains 2s', () => {
+      let input = new Input(['1', '4', '1 2 1 2'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 2')
+    })
+
+    it('contains 3s', () => {
+      let input = new Input(['1', '4', '1 2 3 2'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 3')
+    })
   })
 })

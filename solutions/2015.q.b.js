@@ -14,7 +14,7 @@ function getSolutionFor(D, P) {
   var tMax = _.max(P)
 
   function solve() {
-    if (tMax === 1) return '1'
+    if (tMax <=3) return tMax
     return ''
   }
 
