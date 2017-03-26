@@ -11,8 +11,8 @@
             "name": "Solve",
             "program": "${workspaceRoot}/lib/index.js",
             "args": [
-                "2016.q.c",
-                "C-large-practice"
+                "2015.q.b",
+                "sample"
             ],
             "cwd": "${workspaceRoot}"
         },
@@ -37,7 +37,7 @@
 			// Automatically stop program after launch.
 			"stopOnEntry": false,
 			// Command line arguments passed to the program.
-			"args": ["test/2016.q.d-test.js"],
+			"args": ["test/2015.q.b-test.js"],
 			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
             "cwd": "${workspaceRoot}",
 			// Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
