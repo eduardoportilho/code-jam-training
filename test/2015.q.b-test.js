@@ -73,4 +73,12 @@ describe('2015.q.b', () => {
       expect(output.toString()).to.equal('Case #1: 3')
     })
   })
+
+  describe('Small input:', () => {
+    it('9', () => {
+      let input = new Input(['1', '1', '9'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 5')
+    })
+  })
 })
