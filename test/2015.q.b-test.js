@@ -16,6 +16,42 @@ describe('2015.q.b', () => {
       solution(input, output)
       expect(output.toString()).to.equal('Case #1: 3')
     })
+
+    it('10 10', () => {
+      let input = new Input(['1', '2', '10 10'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 7')
+    })
+
+    it('10 10 10', () => {
+      let input = new Input(['1', '3', '10 10 10'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 8')
+    })
+
+    it('100 50 25', () => {
+      let input = new Input(['1', '3', '100 50 25'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 24')
+    })
+
+    it('100 100', () => {
+      let input = new Input(['1', '2', '100 100'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 27')
+    })
+
+    it('1 2 3 4 5', () => {
+      let input = new Input(['1', '-1', '1 2 3 4 5'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 5')
+    })
+
+    it('7 33 100', () => {
+      let input = new Input(['1', '-1', '7 33 100'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 23')
+    })
   })
 
   describe('Base cases:', () => {

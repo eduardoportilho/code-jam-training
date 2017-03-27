@@ -11,7 +11,7 @@ module.exports = function(input, output) {
 }
 
 function getSolutionFor(D, P) {
-  var Pi = undefined
+  var Parray = undefined
   var maxPi = undefined
   var tMin = undefined
   var interruptCount = 0
@@ -24,21 +24,21 @@ function getSolutionFor(D, P) {
   }
 
   function init() {
-    Pi = P
-    maxPi = _.max(Pi)
+    Parray = P
+    maxPi = _.max(Parray)
     tMin = maxPi
   }
 
   function iterate() {
-    Pi = interrupt(Pi)
+    Parray = interrupt(Parray)
     interruptCount += 1
+    maxPi = _.max(Parray)
 
-    var currentTime = calcTime(Pi) + interruptCount
+    var currentTime = maxPi + interruptCount
     if (currentTime < tMin)
       tMin = currentTime
 
-    maxPi = _.max(Pi)
-    if (interruptCount > maxPi || maxPi <= 3)
+    if (maxPi < 2)
       return tMin
 
     return iterate()
