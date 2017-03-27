@@ -80,5 +80,20 @@ describe('2015.q.b', () => {
       solution(input, output)
       expect(output.toString()).to.equal('Case #1: 5')
     })
+    it('25', () => {
+      let input = new Input(['1', '1', '25'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 9')
+    })
+    it('35', () => {
+      let input = new Input(['1', '1', '35'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 11')
+    })
+    it('27 35', () => {
+      let input = new Input(['1', '2', '27 35'])
+      solution(input, output)
+      expect(output.toString()).to.equal('Case #1: 14')
+    })
   })
 })
