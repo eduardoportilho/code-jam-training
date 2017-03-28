@@ -11,7 +11,7 @@ describe('2015.q.b', () => {
   })
 
   describe('Sample:', () => {
-    it('only 1s', () => {
+    it('4', () => {
       let input = new Input(['1', '1', '4'])
       solution(input, output)
       expect(output.toString()).to.equal('Case #1: 3')
@@ -50,7 +50,7 @@ describe('2015.q.b', () => {
     it('7 33 100', () => {
       let input = new Input(['1', '-1', '7 33 100'])
       solution(input, output)
-      expect(output.toString()).to.equal('Case #1: 23')
+      expect(output.toString()).to.equal('Case #1: 22')
     })
   })
 
