@@ -22,8 +22,11 @@ Boilerplate for solving Google Code Jam problems
 - On VS Code, set your breakpoints and pre F5
 - Reference: [VS code](https://code.visualstudio.com/docs/editor/debugging) [docs](https://code.visualstudio.com/docs/nodejs/nodejs-debugging)
 
-## Improvements:
-- [ ] Implement warmup. For example:
-    - `$ npm run warmup <problem-id>`
-    - `> Executing computing intense routines...`
-    - `> Done! Enter input name and press return to run: _`
+## Problems:
+
+- 2016.q.a: OK
+- 2016.q.b: OK
+- 2016.q.c: OK
+- 2016.q.d: Open...
+- 2015.q.a: OK
+- 2015.q.b: Ok after reviewing solution
