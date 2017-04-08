@@ -10,17 +10,20 @@ describe('2017.q.b', () => {
     output = new Output()
   })
 
-  it('Should be tidy', () => {
-    expect(solution._isTidy(8)).to.be.true
-    expect(solution._isTidy(123)).to.be.true
-    expect(solution._isTidy(555)).to.be.true
-    expect(solution._isTidy(224488)).to.be.true
+  it('Should getFirstDecrescentIndex', () => {
+    expect(solution._getFirstDecrescentIndex('0')).to.equals(-1)
+    expect(solution._getFirstDecrescentIndex('999')).to.equals(-1)
+    expect(solution._getFirstDecrescentIndex('98')).to.equals(0)
+    expect(solution._getFirstDecrescentIndex('898')).to.equals(1)
   })
 
-  it('Should not be tidy', () => {
-    expect(solution._isTidy(20)).to.be.false
-    expect(solution._isTidy(321)).to.be.false
-    expect(solution._isTidy(495)).to.be.false
-    expect(solution._isTidy(999990)).to.be.false
+  it('Should _replaceWithDminus9s', () => {
+    expect(solution._replaceWithDminus9s('1234', 0)).to.equals('0999')
+    expect(solution._replaceWithDminus9s('1234', 1)).to.equals('1199')
+    expect(solution._replaceWithDminus9s('1034', 1)).to.equals('1099')
+  })
+
+  it('Should solve', () => {
+    expect(solution._solve(111111111111111110)).to.equals(99999999999999999)
   })
 })
