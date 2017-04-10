@@ -14,21 +14,23 @@ function getSolutionFor(N, K) {
   var state = 0
 
   function solve() {
-    var stalls = _.fill(Array(N), false);
-    var position, data
+    var stalls = _.repeat('f', N);
+    var position
 
     var bar = new ProgressBar('[:bar] :percent - :elapsed s', { total: K, width: 50 })
 
     while (K > 0) {
       K--
-      data = getStallData(stalls)
-      position = choosePosition(data)
-      stalls[position] = true
+      position = choosePosition(stalls)
+      stalls = replaceAt(stalls, position, 'o')
       bar.tick()
     }
 
-    var min = data[position].min
-    var max = data[position].max
+    var LS = calcLS(stalls, position)
+    var RS = calcRS(stalls, position)
+
+    var min = Math.min(LS, RS)
+    var max = Math.max(LS, RS)
 
     return `${max} ${min}`
   }
@@ -36,92 +38,55 @@ function getSolutionFor(N, K) {
   return solve()
 }
 
-function getStallData(stalls) {
-  var size = stalls.length
-  var LS = Array(size)
-  var distanceToFreeStall = 0
-  var i
-  for (i = 0 ; i < size ; i++) {
-    LS[i] = distanceToFreeStall++
-    if (stalls[i])
-      distanceToFreeStall = 0
-  }
-
-  var RS = Array(size)
-  distanceToFreeStall = 0
-  for (i = (size-1) ; i >=0 ; i--) {
-    RS[i] = distanceToFreeStall++
-    if (stalls[i])
-      distanceToFreeStall = 0
-  }
-
-  var data = {}
-  for (i = 0 ; i < size ; i++) {
-    if (stalls[i])
-      continue //ocuppied
-    data[i] = {}
-    data[i].max = Math.max(LS[i], RS[i])
-    data[i].min = Math.min(LS[i], RS[i])
-  }
-  return data
-}
-
-function choosePosition(data) {
-  var filtered = filterHavingMaximalMin(data)
-  filtered = filterHavingMaximalMax(filtered)
-  return findMinimumIndex(filtered)
-}
-
-function filterHavingMaximalMin(data) {
-  var keys = Object.keys(data)
-
-  //find max
-  var max = -1
-  for (var i = 0 ; i < keys.length ; i++) {
-    var key = keys[i]
-    if (data[key].min > max)
-      max = data[key].min
-  }
-
-  // keep only maximal min
-  var filtered = {}
-  for (var i = 0 ; i < keys.length ; i++) {
-    var key = keys[i]
-    if (data[key].min === max) {
-      filtered[key] = data[key]
+function choosePosition(stallsStr) {
+  var freeSubstrs = stallsStr.split('o')
+  var freeSubstrsSizes = freeSubstrs.map((arr) => arr.length)
+  var maxSize = -1, maxIndex = 0
+  for (var i = 0 ; i < freeSubstrs.length ; i++) {
+    var freeStr = freeSubstrs[i]
+    if (freeStr.length > maxSize) {
+      maxSize = freeStr.length
+      maxIndex = i
     }
   }
-  return filtered
-}
+  var posSubIndex = Math.ceil(maxSize / 2) - 1
 
-function filterHavingMaximalMax(data){
-  var keys = Object.keys(data)
-
-  //find max
-  var max = -1
-  for (var i = 0 ; i < keys.length ; i++) {
-    var key = keys[i]
-    if (data[key].max > max)
-      max = data[key].max
+  var offset = 0
+  for (var i = 0 ; i < maxIndex ; i++) {
+    offset += (freeSubstrs[i].length + 1)
   }
+  return offset + posSubIndex
+}
 
-  // keep only maximal max
-  var filtered = {}
-  for (var i = 0 ; i < keys.length ; i++) {
-    var key = keys[i]
-    if (data[key].max === max) {
-      filtered[key] = data[key]
-    }
+function replaceAt (str, index, replacement) {
+    return str.substr(0, index) + replacement + str.substr(index + replacement.length);
+}
+
+function calcLS(stallsStr, pos) {
+  if(pos === 0) return 0
+  var freeCount = 0,
+    i = pos-1
+
+  while (i >= 0) {
+    if (stallsStr.charAt(i) === 'o')
+      return freeCount
+    i--
+    freeCount++
   }
-  return filtered
+  return freeCount
 }
 
-function findMinimumIndex(data) {
-  var keys = Object.keys(data).sort(function(a, b){ return a-b });
-  return keys[0]
+function calcRS(stallsStr, pos) {
+  var lastPos = stallsStr.length - 1
+  if(pos >= lastPos) return 0
+  var freeCount = 0,
+    i = pos+1
+
+  while (i <= lastPos) {
+    if (stallsStr.charAt(i) === 'o')
+      return freeCount
+    i++
+    freeCount++
+  }
+  return freeCount
 }
-
-
-
-
-
