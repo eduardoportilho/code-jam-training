@@ -11,7 +11,7 @@
             "name": "Solve",
             "program": "${workspaceRoot}/lib/index.js",
             "args": [
-                "2017.q.c",
+                "2017.1a.a",
                 "sample"
             ],
             "cwd": "${workspaceRoot}"
