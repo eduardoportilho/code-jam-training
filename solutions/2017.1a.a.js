@@ -46,17 +46,159 @@ function getSolutionFor(R, C, cake) {
   }
 
   function getNewStatesWithRectangleFrom(state, pos) {
-    var rects = findRectangles(state, pos, null)
-    
-  }
+    var horRect = getHorizontalAxisRect(state, pos)
 
-  function findRectangles(state, initialPos, nextPos) {
-    if (nextPos === null) {
-      var emptyNeighbours = getEmptyNeighbours(state, initialPos)
-      var rectanglesArrays = emptyNeighbours.map((neighbour) => findRectangles(state, initialPos, neighbour))
-      return _.flatten(rectanglesArrays)
+    //up
+    var horRectPlus = increaseOneUp(state, horRect)
+    while (isValidEmptyRect(state, horRectPlus, pos)) {
+      horRect = horRectPlus
+      horRectPlus = increaseOneUp(state, horRect)
     }
 
+    //down
+    horRectPlus = increaseOneDown(state, horRect)
+    while (isValidEmptyRect(state, horRectPlus, pos)) {
+      horRect = horRectPlus
+      horRectPlus = increaseOneDown(state, horRect)
+    }
+
+    var vertRect = getVerticalAxisRect(state, pos)
+    //left
+    var vertRectPlus = increaseOneLeft(state, vertRect)
+    while (isValidEmptyRect(state, vertRectPlus, pos)) {
+      vertRect = vertRectPlus
+      vertRectPlus = increaseOneLeft(state, vertRect)
+    }
+
+    //right
+    var vertRectPlus = increaseOneRight(state, vertRect)
+    while (isValidEmptyRect(state, vertRectPlus, pos)) {
+      vertRect = vertRectPlus
+      vertRectPlus = increaseOneRight(state, vertRect)
+    }
+
+    var rects = [horRect]
+    if(!isSameRect(vertRect, horRect)) {
+      rects = [horRect, vertRect]
+    }
+
+    var val = state[pos.r][pos.c]
+    return rects.map((rect) => fillRect(state, rect, val))
+  }
+
+  function getHorizontalAxisRect(state, pos) {
+    let row = pos.r
+    //left
+    var ci = pos.c 
+    var i = pos.c - 1
+    while (i >= 0) {
+      if (state[row][i] !== '?') {
+        break
+      }
+      ci = i
+      i--
+    }
+    //right
+    var cf = pos.c
+    i = pos.c + 1
+    while (i < C) {
+      if (state[row][i] !== '?') {
+        break
+      }
+      cf = i
+      i++
+    }
+    return [{r: row, c: ci}, {r: row, c: cf}]
+  }
+
+  function getVerticalAxisRect(state, pos) {
+    let col = pos.c
+    //up
+    var ri = pos.r
+    var i =  pos.r - 1
+    while (i >= 0) {
+      if (state[i][col] != '?') {
+        break
+      }
+      ri = i
+      i--
+    }
+    //down
+    var rf = pos.r
+    i = pos.r + 1
+    while (i < R) {
+      if (state[i][col] != '?') {
+        break
+      }
+      rf = i
+      i++
+    }
+    return [{r: ri, c: col}, {r: rf, c: col}]
+  }
+
+  function isValidEmptyRect(state, rect, originalPos) {
+    var val = state[originalPos.r][originalPos.c]
+    var pti = rect[0]
+    var ptf = rect[1]
+
+    if (pti.r < 0 ||
+      pti.c < 0 ||
+      ptf.r >= R ||
+      ptf.c >= C) {
+      return false
+    }
+
+    for(var r = pti.r; r <= ptf.r; r++) {
+      for(var c = pti.c; c <= ptf.c; c++) {
+        if (state[r][c] !== '?' && state[r][c] !== val) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  function increaseOneUp(state, rect) {
+    return [
+      {r: rect[0].r-1, c: rect[0].c},
+      rect[1]
+    ]
+  }
+
+  function increaseOneDown(state, rect) {
+    return [
+      rect[0],
+      {r: rect[1].r+1, c: rect[1].c}
+    ]
+  }
+  function increaseOneLeft(state, rect) {
+    return [
+      {r: rect[0].r, c: rect[0].c-1},
+      rect[1]
+    ]
+  }
+  function increaseOneRight(state, rect) {
+    return [
+      rect[0],
+      {r: rect[1].r, c: rect[1].c+1}
+    ]
+  }
+  function isSameRect(rect1, rect2) {
+    return rect1.r === rect2.r &&
+      rect1.c === rect2.c;
+  }
+
+  function fillRect(state, rect, val) {
+    let newState = _.cloneDeep(state)
+    var pti = rect[0]
+    var ptf = rect[1]
+
+    for(var r = pti.r; r <= ptf.r; r++) {
+      for(var c = pti.c; c <= ptf.c; c++) {
+        newState[r][c] = val
+      }
+    }
+    return newState
   }
 
   function getNextCharPos(state, lastPos) {
