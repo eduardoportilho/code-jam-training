@@ -31,24 +31,33 @@ function getSolutionFor(R, C, cake) {
 
   function iterate() {
     var params = queue.shift()
-    var solHor = fillHorizontal(params.state, params.pos)
-    if (isFinal(solHor)) {
-      return solHor
-    }
 
-    var solVert = fillVertical(params.state, params.pos)
-    if (isFinal(solVert)) {
-      return solVert
-    }
-
+    var newStates = getNewStatesWithRectangleFrom(params.state, params.pos)
     var nextPos = getNextCharPos(params.state, params.pos)
-    if (nextPos) {
-      queue.push({state: solHor, pos: nextPos})
-      queue.push({state: solVert, pos: nextPos})
+    for(var i = 0; i < newStates.length; i++) {
+      if (isFinal(newStates[i])) {
+        return newStates[i]
+      }
+      if (nextPos) {
+        queue.push({state: newStates[i], pos: nextPos})
+      }
     }
     return null
   }
 
+  function getNewStatesWithRectangleFrom(state, pos) {
+    var rects = findRectangles(state, pos, null)
+    
+  }
+
+  function findRectangles(state, initialPos, nextPos) {
+    if (nextPos === null) {
+      var emptyNeighbours = getEmptyNeighbours(state, initialPos)
+      var rectanglesArrays = emptyNeighbours.map((neighbour) => findRectangles(state, initialPos, neighbour))
+      return _.flatten(rectanglesArrays)
+    }
+
+  }
 
   function getNextCharPos(state, lastPos) {
     var nextIndex = 0
