@@ -1,15 +1,15 @@
 let _ = require('lodash')
-let ProgressBar = require('progress');
+let ProgressBar = require('progress')
 
 module.exports = function(input, output) {
   let t = input.popInt()
   let bar = new ProgressBar('[:bar] :percent - :elapsed', { total: t, width: 50 })
-  for(var i = 0 ; i < t ; i++) {
+  for(var i = 0; i < t; i++) {
     var dimensions = input.popIntArray()
     var R = dimensions[0]
     var C = dimensions[1]
     var cake = []
-    for(var ri = 0; ri < R ; ri++) {
+    for(var ri = 0; ri < R; ri++) {
       cake.push(input.popString().split(''))
     }
     var solution = getSolutionFor(R, C, cake)
@@ -26,13 +26,12 @@ function getSolutionFor(R, C, cake) {
     var pos = getNextCharPos(cake, null, visited)
     queue.push({state: cake, pos: pos, visited: visited})
 
-    while(queue.length > 0) {
+    while (queue.length > 0) {
       var solution = iterate() 
       if (solution != null)
         return solutionToString(solution)
     }
-    console.log(R,C,cake)
-    throw new Error('Deu ruim')
+    throw new Error('IMPOSSIBLE')
   }
 
   function iterate() {
@@ -201,7 +200,7 @@ function getSolutionFor(R, C, cake) {
     return x1.r === x2.r &&
       x1.c === x2.c &&
       y1.r === y2.r &&
-      y1.c === y2.c;
+      y1.c === y2.c
   }
 
   function fillRect(state, rect, val) {
@@ -244,56 +243,6 @@ function getSolutionFor(R, C, cake) {
     let r = Math.floor(index/C)
     let c = index % C
     return {r: r, c: c, val: val}
-  }
-
-  function fillHorizontal(state, pos) {
-    let newState = _.cloneDeep(state)
-    let row = pos.r
-    let char = state[row][pos.c]
-    //left
-    var i = pos.c - 1
-    while (i >= 0) {
-      if (newState[row][i] != '?') {
-        break
-      }
-      newState[row][i] = char
-      i--
-    }
-    //right
-    var i = pos.c + 1
-    while (i < C) {
-      if (newState[row][i] != '?') {
-        break
-      }
-      newState[row][i] = char
-      i++
-    }
-    return newState
-  }
-
-  function fillVertical(state, pos) {
-    let newState = _.cloneDeep(state)
-    let col = pos.c
-    let char = state[pos.r][col]
-    //up
-    var i = pos.r - 1
-    while (i >= 0) {
-      if (newState[i][col] != '?') {
-        break
-      }
-      newState[i][col] = char
-      i--
-    }
-    //down
-    var i = pos.r + 1
-    while (i < R) {
-      if (newState[i][col] != '?') {
-        break
-      }
-      newState[i][col] = char
-      i++
-    }
-    return newState
   }
 
   function isFinal(state) {
