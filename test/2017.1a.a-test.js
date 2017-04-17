@@ -10,7 +10,7 @@ describe('2017.1a.a', () => {
     output = new Output()
   })
 
-  it('Should handle rectangles', () => {
+  xit('Should handle rectangles', () => {
     let input = new Input(['1', '2 2', '??', '?A'])
     solution(input, output)
     expect(output.toString()).to.equal(
@@ -21,15 +21,20 @@ describe('2017.1a.a', () => {
   })
 
 
-  it('Should handle rectangles', () => {
-    let input = new Input(['1', '4 3', '?DE', '?AB', '??C', '???'])
+  it('Detected errors', () => {
+    let input = new Input(['1', '4 3',
+'FC?',
+'E?D',
+'???',
+'?BA'
+])
     solution(input, output)
     expect(output.toString()).to.equal(
       'Case #1:\n'+
-      'DDE\n' +
-      'AAB\n' +
-      'CCC\n' +
-      'CCC'
+      'FCC\n' +
+      'EED\n' +
+      'EED\n' +
+      'BBA'
     )
   })
 })

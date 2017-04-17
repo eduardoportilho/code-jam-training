@@ -39,8 +39,8 @@ CCCD
 EEFD
 Case #10:
 FCC
-EED
-EED
+EDD
+EDD
 EBA
 Case #11:
 BCC
@@ -115,8 +115,8 @@ BDD
 CDE
 Case #28:
 BBBB
-EEEC
-AAAD
+EECC
+EEAD
 Case #29:
 BAA
 EFD
@@ -143,8 +143,8 @@ AAC
 Case #34:
 AB
 Case #35:
-BBBC
-BBBC
+BCCC
+BCCC
 BEAD
 Case #36:
 DBBB
@@ -229,8 +229,8 @@ IBHD
 Case #56:
 EEF
 BBF
-CCF
-DDA
+CFF
+CDA
 Case #57:
 ABC
 DBC
@@ -273,9 +273,9 @@ Case #67:
 AA
 BB
 CC
-DD
-EE
-FF
+ED
+ED
+EF
 Case #68:
 ABCD
 ABCD
@@ -319,8 +319,8 @@ CDB
 CAB
 Case #79:
 EEEE
-CCCD
-AAAB
+CCDD
+CCAB
 Case #80:
 BBBB
 DEEE

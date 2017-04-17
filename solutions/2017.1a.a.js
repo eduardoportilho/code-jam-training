@@ -184,8 +184,15 @@ function getSolutionFor(R, C, cake) {
     ]
   }
   function isSameRect(rect1, rect2) {
-    return rect1.r === rect2.r &&
-      rect1.c === rect2.c;
+    let x1 = rect1[0]
+    let y1 = rect1[1]
+    let x2 = rect2[0]
+    let y2 = rect2[1]
+
+    return x1.r === x2.r &&
+      x1.c === x2.c &&
+      y1.r === y2.r &&
+      y1.c === y2.c;
   }
 
   function fillRect(state, rect, val) {

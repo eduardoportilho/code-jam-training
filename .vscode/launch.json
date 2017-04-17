@@ -22,8 +22,8 @@
             "name": "Retro",
             "program": "${workspaceRoot}/lib/retro.js",
             "args": [
-                "2016.q.d",
-                "D-large-practice"
+                "2017.1a.a",
+                "A-small-practice"
             ],
             "cwd": "${workspaceRoot}"
         },
