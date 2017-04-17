@@ -20,21 +20,20 @@ describe('2017.1a.a', () => {
     )
   })
 
-
   it('Detected errors', () => {
     let input = new Input(['1', '4 3',
-'FC?',
-'E?D',
-'???',
-'?BA'
+'BC?',
+'D??',
+'FA?',
+'??E'
 ])
     solution(input, output)
     expect(output.toString()).to.equal(
-      'Case #1:\n'+
-      'FCC\n' +
-      'EED\n' +
-      'EED\n' +
-      'BBA'
+'Case #1:\n'+
+'BCC\n' +
+'DCC\n' +
+'FAA\n' +
+'FEE'
     )
   })
 })

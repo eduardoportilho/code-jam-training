@@ -26,6 +26,7 @@ function getSolutionFor(R, C, cake) {
       if (solution != null)
         return solutionToString(solution)
     }
+    console.log(R,C,cake)
     throw new Error('Deu ruim')
   }
 
@@ -208,6 +209,7 @@ function getSolutionFor(R, C, cake) {
     return newState
   }
 
+  var visitedChars = []
   function getNextCharPos(state, lastPos) {
     var nextIndex = 0
     if (lastPos) {
@@ -215,8 +217,11 @@ function getSolutionFor(R, C, cake) {
     }
     let flat = _.flatten(state)
     while(nextIndex < flat.length) {
-      if(flat[nextIndex] != '?') {
-        return indexToPos(nextIndex)
+      var currChar = flat[nextIndex]
+      if(currChar != '?' &&
+        !visitedChars.includes(currChar)) {
+        visitedChars.push(currChar)
+        return indexToPos(nextIndex, currChar)
       }
       nextIndex += 1
     }
@@ -227,10 +232,10 @@ function getSolutionFor(R, C, cake) {
     return (pos.r * C) + pos.c
   }
 
-  function indexToPos(index) {
+  function indexToPos(index, val) {
     let r = Math.floor(index/C)
     let c = index % C
-    return {r: r, c: c}
+    return {r: r, c: c, val: val}
   }
 
   function fillHorizontal(state, pos) {
