@@ -10,7 +10,7 @@ describe('2017.1a.a', () => {
     output = new Output()
   })
 
-  xit('Should handle rectangles', () => {
+  it('Should handle rectangles', () => {
     let input = new Input(['1', '2 2', '??', '?A'])
     solution(input, output)
     expect(output.toString()).to.equal(
@@ -20,7 +20,7 @@ describe('2017.1a.a', () => {
     )
   })
 
-  xit('Detected errors', () => {
+  it('Detected errors', () => {
     let input = new Input(['1', '4 3',
 'BC?',
 'D??',
@@ -54,7 +54,7 @@ describe('2017.1a.a', () => {
 'CC\n' +
 'BD\n' +
 'BD\n' +
-'AA'
+'AD'
     )
   })
 })

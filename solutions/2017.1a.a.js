@@ -18,8 +18,9 @@ function getSolutionFor(R, C, cake) {
   var queue = []
 
   function solve() {
-    var pos = getNextCharPos(cake, null)
-    queue.push({state: cake, pos: pos})
+    var visited = []
+    var pos = getNextCharPos(cake, null, visited)
+    queue.push({state: cake, pos: pos, visited: visited})
 
     while(queue.length > 0) {
       var solution = iterate() 
@@ -32,15 +33,18 @@ function getSolutionFor(R, C, cake) {
 
   function iterate() {
     var params = queue.shift()
+    var currState = params.state
+    var currPos = params.pos
+    var currVisited = params.visited
 
-    var newStates = getNewStatesWithRectangleFrom(params.state, params.pos)
-    var nextPos = getNextCharPos(params.state, params.pos)
+    var newStates = getNewStatesWithRectangleFrom(currState, currPos)
+    var nextPos = getNextCharPos(currState, currPos, currVisited)
     for(var i = 0; i < newStates.length; i++) {
       if (isFinal(newStates[i])) {
         return newStates[i]
       }
       if (nextPos) {
-        queue.push({state: newStates[i], pos: nextPos})
+        queue.push({state: newStates[i], pos: nextPos, visited: _.clone(currVisited)})
       }
     }
     return null
@@ -209,8 +213,8 @@ function getSolutionFor(R, C, cake) {
     return newState
   }
 
-  var visitedChars = []
-  function getNextCharPos(state, lastPos) {
+  function getNextCharPos(state, lastPos, visitedChars) {
+    visitedChars = visitedChars || []
     var nextIndex = 0
     if (lastPos) {
       nextIndex = posToIndex(lastPos) + 1
