@@ -20,7 +20,7 @@ describe('2017.1a.a', () => {
     )
   })
 
-  it('Detected errors', () => {
+  xit('Detected errors', () => {
     let input = new Input(['1', '4 3',
 'BC?',
 'D??',
@@ -34,6 +34,27 @@ describe('2017.1a.a', () => {
 'DCC\n' +
 'FAA\n' +
 'FEE'
+    )
+  })
+
+  it('Detected errors', () => {
+    let input = new Input(['1', '6 2',
+'??',
+'?E',
+'C?',
+'BD',
+'??',
+'A?'
+])
+    solution(input, output)
+    expect(output.toString()).to.equal(
+'Case #1:\n'+
+'EE\n' +
+'EE\n' +
+'CC\n' +
+'BD\n' +
+'BD\n' +
+'AA'
     )
   })
 })
