@@ -1,6 +1,9 @@
 let _ = require('lodash')
+let ProgressBar = require('progress');
+
 module.exports = function(input, output) {
   let t = input.popInt()
+  let bar = new ProgressBar('[:bar] :percent - :elapsed', { total: t, width: 50 })
   for(var i = 0 ; i < t ; i++) {
     var dimensions = input.popIntArray()
     var R = dimensions[0]
@@ -11,6 +14,7 @@ module.exports = function(input, output) {
     }
     var solution = getSolutionFor(R, C, cake)
     output.addSolution(solution)
+    bar.tick()
   }
 }
 
@@ -32,7 +36,7 @@ function getSolutionFor(R, C, cake) {
   }
 
   function iterate() {
-    var params = queue.shift()
+    var params = queue.pop()
     var currState = params.state
     var currPos = params.pos
     var currVisited = params.visited
