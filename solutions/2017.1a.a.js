@@ -1,4 +1,5 @@
 let _ = require('lodash')
+let jsturbo = require('jsturbo')
 let ProgressBar = require('progress')
 
 module.exports = function(input, output) {
@@ -20,6 +21,7 @@ module.exports = function(input, output) {
 
 function getSolutionFor(R, C, cake) {
   var queue = []
+  let cakeSize = {R:R, C:C}
 
   function solve() {
     var visited = []
@@ -220,7 +222,7 @@ function getSolutionFor(R, C, cake) {
     visitedChars = visitedChars || []
     var nextIndex = 0
     if (lastPos) {
-      nextIndex = posToIndex(lastPos) + 1
+      nextIndex = jsturbo.matrix.coordToIndex(lastPos, cakeSize) + 1
     }
     let flat = _.flatten(state)
     while(nextIndex < flat.length) {
@@ -228,21 +230,11 @@ function getSolutionFor(R, C, cake) {
       if(currChar != '?' &&
         !visitedChars.includes(currChar)) {
         visitedChars.push(currChar)
-        return indexToPos(nextIndex, currChar)
+        return jsturbo.matrix.indexToCoord(nextIndex, cakeSize)
       }
       nextIndex += 1
     }
     return null
-  }
-
-  function posToIndex(pos) {
-    return (pos.r * C) + pos.c
-  }
-
-  function indexToPos(index, val) {
-    let r = Math.floor(index/C)
-    let c = index % C
-    return {r: r, c: c, val: val}
   }
 
   function isFinal(state) {
