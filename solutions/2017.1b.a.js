@@ -1,3 +1,5 @@
+var BigNumber = require('bignumber.js');
+
 module.exports = function(input, output) {
   let t = input.popInt()
   for(var i = 0 ; i < t ; i++) {
@@ -24,17 +26,18 @@ function getSolutionFor(D, N, horses) {
   var state = 0
 
   function solve() {
-    var maxT = 0
-    var maxTi = -1
+    var maxT = new BigNumber(0)
     horses.forEach(horse => {
-      horse.t = (D - horse.K) / horse.S
-      if(horse.t > maxT) {
-        maxT = horse.t
-        maxTi = horse.index
+      var dist = new BigNumber(D - horse.K)
+      var speed = new BigNumber(horse.S)
+      var time = dist.dividedBy(speed)
+
+      if(time.toNumber() > maxT.toNumber()) {
+        maxT = time
       }
     })
 
-    return (D/maxT).toFixed(6)
+    return new BigNumber(D).dividedBy(maxT).toFixed(6)
   }
 
   return solve()

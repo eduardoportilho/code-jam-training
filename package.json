@@ -21,6 +21,7 @@
   "homepage": "https://github.com/eduardoportilho/code-jam-training#readme",
   "dependencies": {
     "big-integer": "^1.6.17",
+    "bignumber.js": "^4.0.1",
     "jsturbo": "^1.7.0",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
