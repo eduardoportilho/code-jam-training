@@ -39,6 +39,7 @@ module.exports = function(input, output) {
 }
 
 function getSolutionFor(N, Q, horses, dists, pares) {
+  //TODO use priority queue here
   var queue = []
 
   function solve() {
